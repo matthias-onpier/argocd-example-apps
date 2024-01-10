@@ -1,0 +1,21 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: guestbook-ui-hpa
+spec:
+  minReplicas: 2
+  maxReplicas: 5
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 60
+  metrics:
+    - resource:
+        name: cpu
+        target:
+          averageUtilization: 80
+          type: Utilization
+      type: Resource
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: guestbook-ui

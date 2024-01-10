@@ -13,6 +13,18 @@ spec:
       labels:
         app: guestbook-ui
     spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: serverpod
+                  operator: In
+                  values:
+                  - guestbook-ui
+              topologyKey: kubernetes.io/hostname
       containers:
       - image: gcr.io/heptio-images/ks-guestbook-demo:0.2
         name: guestbook-ui
