@@ -3,7 +3,7 @@ kind: HorizontalPodAutoscaler
 metadata:
   name: guestbook-ui-hpa
 spec:
-  minReplicas: 4
+  minReplicas: 3
   maxReplicas: 10
   behavior:
     scaleUp:
